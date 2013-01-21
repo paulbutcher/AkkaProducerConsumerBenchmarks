@@ -8,9 +8,9 @@ object WordCountBuild extends Build {
     scalaVersion := "2.10.0",
     scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature"))
 
-  lazy val utils = Project(
-    "utils", 
-    file("utils"),
+  lazy val core = Project(
+    "core", 
+    file("core"),
     settings = buildSettings ++ Seq(
       name := "Utils", 
       libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.1.0"))
@@ -18,5 +18,5 @@ object WordCountBuild extends Build {
   lazy val consumer_pulls = Project(
     "consumer_pulls", 
     file("consumer_pulls"),
-    settings = buildSettings ++ Seq(name := "Consumer Pulls")) dependsOn(utils)
+    settings = buildSettings ++ Seq(name := "Consumer Pulls")) dependsOn(core)
 }
