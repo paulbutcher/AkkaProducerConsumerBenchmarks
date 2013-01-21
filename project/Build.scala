@@ -15,6 +15,11 @@ object WordCountBuild extends Build {
       name := "Utils", 
       libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.1.0"))
 
+  lazy val balancing_dispatcher_hybrid = Project(
+    "balancing_dispatcher_hybrid", 
+    file("balancing_dispatcher_hybrid"),
+    settings = buildSettings ++ Seq(name := "Balancing Dispatcher Hybrid")) dependsOn(core)
+
   lazy val consumer_pulls = Project(
     "consumer_pulls", 
     file("consumer_pulls"),
