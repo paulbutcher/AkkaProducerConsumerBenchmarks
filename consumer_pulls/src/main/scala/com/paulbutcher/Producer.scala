@@ -3,9 +3,8 @@ package com.paulbutcher
 import akka.actor._
 
 case class RequestWork()
-case class NoMoreWork()
 
-class Parser extends Actor {
+class Producer extends Actor {
 
   val pages = Pages(100000, "enwiki.xml")
 
@@ -14,6 +13,6 @@ class Parser extends Actor {
       if (pages.hasNext)
         sender ! pages.next
       else
-        sender ! NoMoreWork
+        sender ! PoisonPill
   }
 }
