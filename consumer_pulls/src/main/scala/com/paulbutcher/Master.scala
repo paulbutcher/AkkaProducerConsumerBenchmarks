@@ -7,8 +7,8 @@ class Master extends Actor {
   var consumers = Set[ActorRef]()
   val producer = context.actorOf(Props[Producer], "producer")
 
-  for (i <- 0 to 8)
-    consumers += context.actorOf(Props(new Consumer(producer)), "consumer")
+  for (i <- 0 until 9)
+    consumers += context.actorOf(Props(new Consumer(producer)), s"consumer$i")
   consumers foreach context.watch _
 
   def receive = {
