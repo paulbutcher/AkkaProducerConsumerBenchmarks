@@ -29,4 +29,9 @@ object WordCountBuild extends Build {
     "consumer_pulls", 
     file("consumer_pulls"),
     settings = buildSettings ++ Seq(name := "Consumer Pulls")) dependsOn(core)
+
+  lazy val consumer_pulls_batched = Project(
+    "consumer_pulls_batched", 
+    file("consumer_pulls_batched"),
+    settings = buildSettings ++ Seq(name := "Consumer Pulls Batched")) dependsOn(core)
 }
