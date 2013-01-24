@@ -12,8 +12,8 @@ class Master extends Actor {
   consumers foreach context.watch _
 
   def receive = {
-    case Terminated(counter) =>
-      consumers -= counter
+    case Terminated(consumer) =>
+      consumers -= consumer
       if (consumers.isEmpty)
         context.system.shutdown
   }
