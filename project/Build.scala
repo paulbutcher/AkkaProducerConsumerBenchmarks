@@ -1,8 +1,10 @@
 import sbt._
 import Keys._
+import sbtassembly.Plugin._
+import AssemblyKeys._
 
 object WordCountBuild extends Build {
-  val buildSettings = Defaults.defaultSettings ++ Seq(
+  val buildSettings = Defaults.defaultSettings ++ assemblySettings ++ Seq(
     organization := "com.paulbutcher",
     version := "0.1",
     scalaVersion := "2.10.0",
@@ -34,4 +36,9 @@ object WordCountBuild extends Build {
     "consumer_pulls_batched", 
     file("consumer_pulls_batched"),
     settings = buildSettings ++ Seq(name := "Consumer Pulls Batched")) dependsOn(core)
+
+  lazy val consumer_pulls_cached = Project(
+    "consumer_pulls_cached", 
+    file("consumer_pulls_cached"),
+    settings = buildSettings ++ Seq(name := "Consumer Pulls Cached")) dependsOn(core)
 }
