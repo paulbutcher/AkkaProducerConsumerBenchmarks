@@ -10,7 +10,7 @@ class Master extends Actor {
   context.watch(cache)
 
   var consumers = Set[ActorRef]()
-  for (i <- 0 until 7)
+  for (i <- 0 until WordCount.numConsumers)
     consumers += context.actorOf(Props(new Consumer(cache)), s"consumer$i")
   consumers foreach context.watch _
 

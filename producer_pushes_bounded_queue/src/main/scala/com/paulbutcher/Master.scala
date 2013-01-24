@@ -6,7 +6,7 @@ import akka.routing.RoundRobinRouter
 class Master extends Actor {
 
   val consumers = context.actorOf(Props[Consumer].
-    withRouter(RoundRobinRouter(5)).
+    withRouter(RoundRobinRouter(WordCount.numConsumers)).
     withDispatcher("consumer-dispatcher"), "consumers")
   val producer = context.actorOf(Props(new Producer(consumers)), "producer")
 
