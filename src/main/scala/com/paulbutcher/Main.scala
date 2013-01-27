@@ -17,7 +17,7 @@ object Benchmarks extends App {
       Run("pull_1", WordCountPull.getActor(1) _, WordCountPull.getConfig _),
       Run("pull_10", WordCountPull.getActor(10) _, WordCountPull.getConfig _),
       Run("pull_20", WordCountPull.getActor(20) _, WordCountPull.getConfig _),
-      Run("pull_50", WordCountPull.getActor(20) _, WordCountPull.getConfig _),
+      Run("pull_50", WordCountPull.getActor(50) _, WordCountPull.getConfig _),
       Run("pull_cached", WordCountCached.getActor(1) _, WordCountCached.getConfig _)
     )
 
@@ -26,8 +26,8 @@ object Benchmarks extends App {
 
   def execute(run: Run) {
     val times = for (i <- 1 to 8) yield {
-        System.gc
-        Thread.sleep(30000)
+        System.gc             // GC so each test starts from a clean heap
+        Thread.sleep(10000)   // Sleep between tests to avoid thermal throttling
         execute(run, i)
       }
 
