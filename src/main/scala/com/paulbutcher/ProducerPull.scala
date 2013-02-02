@@ -11,7 +11,7 @@ class ProducerPull extends Actor {
   def receive = {
     case RequestWork(batchSize) =>
       if (pages.hasNext)
-        sender ! Work(pages.take(batchSize).toArray)
+        sender ! Work(pages.take(batchSize).toVector)
       else
         context.stop(self)
   }

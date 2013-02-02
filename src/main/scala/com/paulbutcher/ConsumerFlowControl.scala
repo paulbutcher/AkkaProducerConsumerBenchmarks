@@ -9,8 +9,8 @@ class ConsumerFlowControl extends Actor {
 
   def receive = {
     case Page(title, text) =>
+      sender ! Processed
       for (word <- Words(text))
         counts(word) += 1
-      sender ! Processed
   }
 }

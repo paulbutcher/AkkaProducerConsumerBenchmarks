@@ -3,7 +3,7 @@ package com.paulbutcher
 import akka.actor._
 import collection.mutable.HashMap
 
-case class Work(pages: Array[Page])
+case class Work(pages: Seq[Page])
 
 class ConsumerPull(producer: ActorRef, batchSize: Int) extends Actor {
 
@@ -15,9 +15,9 @@ class ConsumerPull(producer: ActorRef, batchSize: Int) extends Actor {
 
   def receive = {
     case Work(pages) =>
+      producer ! RequestWork(batchSize)
       for (Page(title, text) <- pages)
         for (word <- Words(text))
           counts(word) += 1
-      producer ! RequestWork(batchSize)
   }
 }

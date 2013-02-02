@@ -25,7 +25,7 @@ object Benchmarks extends App {
     runs foreach execute _
 
   def execute(run: Run) {
-    val times = for (i <- 1 to 8) yield {
+    val times = for (i <- 1 to 10) yield {
         System.gc             // GC so each test starts from a clean heap
         Thread.sleep(10000)   // Sleep between tests to avoid thermal throttling
         execute(run, i)
